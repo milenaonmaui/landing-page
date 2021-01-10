@@ -17,8 +17,8 @@
  * Define Global Variables
  * 
 */
-
-
+//const fragment = document.createDocumentFragment();
+const navList = document.querySelector('#navbar__list');
 /**
  * End Global Variables
  * Start Helper Functions
@@ -34,7 +34,12 @@
 */
 
 // build the nav
-
+for (let i = 0; i < 4; i++){
+    const newListItem = document.createElement('li')
+    newListItem.appendChild(document.createTextNode("MenuItem"))
+    newListItem.className = "menu__link"
+    navList.appendChild(newListItem)
+}
 
 // Add class 'active' to section when near top of viewport
 

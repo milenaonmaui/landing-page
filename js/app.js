@@ -20,7 +20,8 @@
 //const fragment = document.createDocumentFragment();
 
 const navList = document.querySelector('#navbar__list');
-const sectionsList = document.querySelectorAll('section')
+const sectionsList = document.querySelectorAll('section');
+let currActiveSection = document.getElementsByClassName('section__active')[0];
 console.log(sectionsList)
 
 /**
@@ -28,20 +29,24 @@ console.log(sectionsList)
  * Start Helper Functions
  * 
 */
-function deactivateSection(){
-    const section = document.getElementsByClassName('section__active');
-    if (section){
-        section[0].classList.remove('section__active')
-    } 
+function deactivateSection(section){  
+        section.classList.remove('section__active')
 }
 
-function activateSection(sectionId) {
-    const section = document.getElementById(sectionId);
+function activateSection(section) {
     section.classList.add('section__active')
     console.log("Activated section", section)
 }
-deactivateSection()
-activateSection("about")
+
+function showNavLink(id) {
+
+}
+
+function hideNavLink(id){
+
+}
+
+
 
 /**
  * End Helper Functions
@@ -59,7 +64,8 @@ function buildNav() {
         const navLink = document.createElement('a');
         const navLinkText = document.createTextNode(section.dataset.nav);
         navLink.appendChild(navLinkText);
-        navLink.href = '#' + section.id;        
+        navLink.href = '#' + section.id;
+        navLink.addEventListener('click', scrollToAnchorId)        
         newListItem.appendChild(navLink)
         newListItem.className = "menu__link"
         navList.appendChild(newListItem)
@@ -69,11 +75,27 @@ function buildNav() {
 
 // Add class 'active' to section when near top of viewport
 
-buildNav()
+function handleActiveContent(event) {
+    for (const section of sectionsList) {
+        const sectionTop = section.getBoundingClientRect().top
+        if (sectionTop > 0 && sectionTop < window.visualViewport.height/2){
+            console.log("Deactivating ", currActiveSection)
+            deactivateSection(currActiveSection)
+            activateSection(section)
+            currActiveSection = section;
+        }
+    }
+ }
+
+
 
 // Scroll to anchor ID using scrollTO event
 
+function scrollToAnchorId(event){
+    event.preventDefault();
+    console.log(event.target)
 
+}
 /**
  * End Main Functions
  * Begin Events
@@ -81,6 +103,9 @@ buildNav()
 */
 
 // Build menu 
+
+buildNav()
+window.addEventListener('scroll', handleActiveContent)
 
 // Scroll to section on link click
 

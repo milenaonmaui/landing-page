@@ -25,13 +25,18 @@ const sections = {
     contact: "Contact Us"
 }
 const navList = document.querySelector('#navbar__list');
+const sectionsList = document.querySelectorAll('section')
+console.log(sectionsList)
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
 
-
+function activateSection(sectionId) {
+    const section = document.querySelector(sectionId);
+    section.classList.add('active')
+}
 
 /**
  * End Helper Functions
@@ -50,9 +55,15 @@ function buildNav(currSection) {
         navList.appendChild(newListItem)
     }
 }
+
+function activateSection(event) {
+    const viewport = event.target;
+
+}
 // Add class 'active' to section when near top of viewport
 let currSection = "products"
 buildNav(currSection)
+
 // Scroll to anchor ID using scrollTO event
 
 

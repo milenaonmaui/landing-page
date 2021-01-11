@@ -18,23 +18,21 @@
  * 
 */
 //const fragment = document.createDocumentFragment();
-const sections = {
-    about: "Our Story",
-    products: "Products",
-    location: "Find Us",
-    contact: "Contact Us"
-}
+
 const navList = document.querySelector('#navbar__list');
 const sectionsList = document.querySelectorAll('section')
 console.log(sectionsList)
+
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-function deactivateSection(sectionId){
-    const section = document.getElementById(sectionId);
-    section.classList.remove('section__active')
+function deactivateSection(){
+    const section = document.getElementsByClassName('section__active');
+    if (section){
+        section[0].classList.remove('section__active')
+    } 
 }
 
 function activateSection(sectionId) {
@@ -42,21 +40,27 @@ function activateSection(sectionId) {
     section.classList.add('section__active')
     console.log("Activated section", section)
 }
+deactivateSection()
 activateSection("about")
-deactivateSection("products")
+
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
 */
 
-// build the nav
+// build the nav removing link to active section
 
-function buildNav(currSection) {
-    for (const section in sections){
-        if (section === currSection) continue;
-        const newListItem = document.createElement('li')
-        newListItem.appendChild(document.createTextNode(sections[section]))
+function buildNav() {
+    const activeSectionId = document.getElementsByClassName('section__active')[0].id;
+    for (const section of sectionsList){       
+        if (section.id === activeSectionId) continue;
+        const newListItem = document.createElement('li');
+        const navLink = document.createElement('a');
+        const navLinkText = document.createTextNode(section.dataset.nav);
+        navLink.appendChild(navLinkText);
+        navLink.href = '#' + section.id;        
+        newListItem.appendChild(navLink)
         newListItem.className = "menu__link"
         navList.appendChild(newListItem)
     }
@@ -64,8 +68,8 @@ function buildNav(currSection) {
 
 
 // Add class 'active' to section when near top of viewport
-let currSection = "products"
-buildNav(currSection)
+
+buildNav()
 
 // Scroll to anchor ID using scrollTO event
 

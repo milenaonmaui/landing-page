@@ -32,12 +32,18 @@ console.log(sectionsList)
  * Start Helper Functions
  * 
 */
-
-function activateSection(sectionId) {
-    const section = document.querySelector(sectionId);
-    section.classList.add('active')
+function deactivateSection(sectionId){
+    const section = document.getElementById(sectionId);
+    section.classList.remove('section__active')
 }
 
+function activateSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.classList.add('section__active')
+    console.log("Activated section", section)
+}
+activateSection("about")
+deactivateSection("products")
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -56,10 +62,7 @@ function buildNav(currSection) {
     }
 }
 
-function activateSection(event) {
-    const viewport = event.target;
 
-}
 // Add class 'active' to section when near top of viewport
 let currSection = "products"
 buildNav(currSection)

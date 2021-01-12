@@ -34,6 +34,10 @@ h1 {
 }
 
 h2 {
+    width: 80%;
+    margin: 0 auto;
+    padding: 1em;
+    padding-bottom: 0;
     border-bottom: 1px solid #cc1;
     font-family: 'Oxygen', Sans-Serif;
     font-size: 3em;
@@ -43,6 +47,9 @@ h2 {
 p {
     line-height: 1.6em;
     color: #eee;
+    text-align: justify;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 /* ---- Layout Rules ---- */
@@ -111,9 +118,8 @@ section {
     z-index: 5;
 }
 img {
-    width: 50%;
+    max-width: 100%;  
     height: auto;
-    display: inline-block;
 }
 /* Footer Styles */
 .page__footer {
@@ -129,33 +135,45 @@ img {
 
 /* ---- Theme Rules ---- */
 /* Landing Container Styles */
+
 .landing__container {
     padding: 1em;
     text-align: left;
     display: flex;
+    flex-direction: column;
 }
 
-@media only screen and (min-width: 35em){
+.picture {
+    padding: 1em 2em;
+}
+@media only screen and (min-width: 50em){
     .landing__container {
-        max-width: 50em;
+        max-width: 60em;
         padding: 4em;
+        flex-direction: row;
+    }
+    section:nth-of-type(even) .landing__container {
+        flex-direction: row-reverse;
     }
 }
+
+
 
 section:nth-of-type(even) .landing__container {
     margin-right: 0;
     margin-left: auto;
-    text-align: right; 
+    text-align: right;
 }
-
+section:nth-of-type(even) h2 {
+    text-align: right;
+}
 /* Background Circles */
-/* Note that background circles are created with psuedo elements before and after */
-/* Circles appear to be random do to use of :nth-of-type psuedo class */
+
 section:nth-of-type(odd) .landing__container::before {
     content: '';
     background: rgba(255, 255, 255, 0.187);
     position: absolute;
-    z-index: -5;
+    z-index: 5;
     width: 20vh;
     height: 20vh;
     border-radius: 50%;
@@ -170,7 +188,7 @@ section:nth-of-type(even) .landing__container::before {
     position: absolute;
     top: 3em;
     right: 3em;
-    z-index: -5;
+    z-index: 5;
     width: 10vh;
     height: 10vh;
     border-radius: 50%;
@@ -185,7 +203,7 @@ section:nth-of-type(3n) .landing__container::after {
     position: absolute;
     right: 0;
     bottom: 0;
-    z-index: -5;
+    z-index: 5;
     width: 10vh;
     height: 10vh;
     border-radius: 50%;
@@ -200,7 +218,7 @@ section:nth-of-type(3n + 1) .landing__container::after {
     position: absolute;
     right: 20vw;
     bottom: -5em;
-    z-index: -5;
+    z-index: 5;
     width: 15vh;
     height: 15vh;
     border-radius: 50%;
@@ -211,7 +229,7 @@ section:nth-of-type(3n + 1) .landing__container::after {
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
-/* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
+
 section.section__active {
     background: linear-gradient(0deg,rgba(199, 236, 243, 0.5) 0%, rgba(49, 208, 240, 0.5) 100%);
 }

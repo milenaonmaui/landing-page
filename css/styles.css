@@ -146,6 +146,7 @@ img {
 .picture {
     padding: 1em 2em;
 }
+
 @media only screen and (min-width: 50em){
     .landing__container {
         max-width: 60em;
@@ -156,8 +157,6 @@ img {
         flex-direction: row-reverse;
     }
 }
-
-
 
 section:nth-of-type(even) .landing__container {
     margin-right: 0;

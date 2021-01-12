@@ -93,8 +93,10 @@ function handleActiveContent(event) {
 
 function scrollToAnchorId(event){
     event.preventDefault();
-    console.log(event.target)
-
+    const sectionId = event.target.href.split("#")[1];
+    const section = document.getElementById(sectionId);
+    window.scrollTo(0,section.getBoundingClientRect().top)
+    //console.log(sectionId, section.getBoundingClientRect().top)
 }
 /**
  * End Main Functions

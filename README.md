@@ -1,1 +1,1 @@
-A multi-section landing page with a navigation menu that updates dynamically based on the amount of content that is added to the page
+A multi-section landing page with a navigation menu that updates dynamically based on the amount of content that is added to the page. Add a section with html <section id="section_id" data-nav="Section Name"> and Section Name will appear in Navigation Bar

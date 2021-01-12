@@ -99,6 +99,9 @@ section {
     color: #fff;
 }
 
+.navbar__menu .nav__active {
+    background: rgb(149, 243, 247);
+}
 /* Header Styles */
 .page__header {
     background: #fff;

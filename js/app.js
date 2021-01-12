@@ -30,22 +30,17 @@ console.log(sectionsList)
  * 
 */
 function deactivateSection(section){  
-        section.classList.remove('section__active')
+    section.classList.remove('section__active')
+    const navLink = document.getElementById("nav-" + section.id)
+    console.log("Nav Link ", navLink)
+    navLink.classList.remove('nav__active');
 }
 
 function activateSection(section) {
     section.classList.add('section__active')
-    console.log("Activated section", section)
+    const navLink = document.getElementById("nav-" + section.id)
+    navLink.classList.add('nav__active');
 }
-
-function showNavLink(id) {
-
-}
-
-function hideNavLink(id){
-
-}
-
 
 
 /**
@@ -57,9 +52,7 @@ function hideNavLink(id){
 // build the nav removing link to active section
 
 function buildNav() {
-    const activeSectionId = document.getElementsByClassName('section__active')[0].id;
     for (const section of sectionsList){       
-        if (section.id === activeSectionId) continue;
         const newListItem = document.createElement('li');
         const navLink = document.createElement('a');
         const navLinkText = document.createTextNode(section.dataset.nav);
@@ -68,6 +61,7 @@ function buildNav() {
         navLink.addEventListener('click', scrollToAnchorId)        
         newListItem.appendChild(navLink)
         newListItem.className = "menu__link"
+        newListItem.id = "nav-" + section.id;
         navList.appendChild(newListItem)
     }
 }
@@ -76,10 +70,11 @@ function buildNav() {
 // Add class 'active' to section when near top of viewport
 
 function handleActiveContent(event) {
+    console.log("Inside active handler")
     for (const section of sectionsList) {
         const sectionTop = section.getBoundingClientRect().top
-        if (sectionTop > 0 && sectionTop < window.visualViewport.height/2){
-            console.log("Deactivating ", currActiveSection)
+        console.log("Section ", section.id, "offset ", sectionTop)
+        if (sectionTop > -1 && sectionTop < window.visualViewport.height/2){
             deactivateSection(currActiveSection)
             activateSection(section)
             currActiveSection = section;
@@ -95,7 +90,8 @@ function scrollToAnchorId(event){
     event.preventDefault();
     const sectionId = event.target.href.split("#")[1];
     const section = document.getElementById(sectionId);
-    window.scrollTo(0,section.getBoundingClientRect().top)
+    //window.scrollTo(0,section.getBoundingClientRect().top)
+    window.scrollTo(0,section.offsetTop)
     //console.log(sectionId, section.getBoundingClientRect().top)
 }
 /**
